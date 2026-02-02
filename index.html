@@ -675,3 +675,24 @@
     });
   });
 </script>
+<script type="module">
+  import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
+
+  const supabaseUrl = 'https://bstadbjsqrxqczmuxoqt.supabase.co'
+  const supabaseKey = 'sb_publishable_n9xIKpHGoxFh2sOCbOPvnw_UxzmLf22'
+  const supabase = createClient(supabaseUrl, supabaseKey)
+
+  document.querySelectorAll('button').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      const product = btn.getAttribute('data-product') || btn.textContent.trim()
+
+      try {
+        await supabase.from('orders').insert([{ product, date: new Date() }])
+        alert(`تم حفظ طلبك: "${product}"`)
+      } catch (err) {
+        console.error(err)
+        alert('حدث خطأ أثناء حفظ الطلب.')
+      }
+    })
+  })
+</script>
