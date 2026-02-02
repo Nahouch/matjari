@@ -663,3 +663,15 @@
     </script>
 </body>
   </html>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('button').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const product = btn.getAttribute('data-product') || btn.textContent.trim();
+        alert(`تم الضغط على الزر: "${product}"`);
+      });
+    });
+  });
+</script>
